@@ -3,7 +3,7 @@ const { router } = require('./controllers/controlListProducts');
 
 const app = express();
 
-app.use(router)
+app.use(router);
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {

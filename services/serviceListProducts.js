@@ -1,13 +1,13 @@
-const { modelListAllProducts } = require('../models/modelListProducts')
+const { modelListAllProducts } = require('../models/modelListProducts');
 
 const serviceListProducts = async (id) => {
-  let data = await modelListAllProducts()
+  let data = await modelListAllProducts();
 
   if (id !== undefined) {
-    [data] = data.filter((product) => product.id == id)
+    [data] = data.filter((product) => Number(product.id) === Number(id));
   }
 
-  return data
-}
+  return data;
+};
 
 module.exports = serviceListProducts;
