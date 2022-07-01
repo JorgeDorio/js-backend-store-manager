@@ -1,4 +1,4 @@
-const serviceListProducts = require('../services/serviceListProducts');
+const { serviceListProducts } = require('../services/serviceListProducts');
 const { NOT_FOUND } = require('../HTTP_STATUS');
 
 const midVerifyId = async (req, res, next) => {

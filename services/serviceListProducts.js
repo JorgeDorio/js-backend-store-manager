@@ -10,4 +10,4 @@ const serviceListProducts = async (id) => {
   return data;
 };
 
-module.exports = serviceListProducts;
+module.exports = { serviceListProducts };
