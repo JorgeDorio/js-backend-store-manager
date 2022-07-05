@@ -2,8 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../models/connection');
 const { allProducts } = require('../mocks')
-
-const { modelListAllProducts } = require('../../../models/modelListProducts');
+const model = require('../../../models/products');
 
 describe('Verifica a função que recebe os dados', () => {
   describe('Verifica se retorna um array com os dados', () => {
@@ -15,11 +14,11 @@ describe('Verifica a função que recebe os dados', () => {
       connection.query.restore();
     })
     it('Verifica se a função retorna um array', async () => {
-      const response = await modelListAllProducts()
+      const response = await model.listProducts()
       expect(response).to.be.an('array')
     })
     it('Verifica se o array contem todos os itens', async () => {
-      const response = await modelListAllProducts()
+      const response = await model.listProducts()
       expect(response.length).to.be.equal(3)
     })
   })
@@ -30,7 +29,7 @@ describe('Verifica a função que recebe os dados', () => {
     })
 
     it('Verifica se a função retorna undefined', async () => {
-      const response = await modelListAllProducts()
+      const response = await model.listProducts()
       expect(response).to.be.equal(undefined)
     })
 
@@ -39,4 +38,3 @@ describe('Verifica a função que recebe os dados', () => {
     })
   })
 })
-
