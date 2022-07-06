@@ -6,4 +6,12 @@ const listProducts = async () => {
   return data;
 };
 
-module.exports = { listProducts };
+const createProduct = async (name) => {
+  await connection.query('INSERT INTO products (name) VALUES (?)', [name]);
+  const [[response]] = await connection.query(
+    'SELECT * FROM StoreManager.products ORDER BY id DESC limit 1',
+  );
+  return response;
+};
+
+module.exports = { listProducts, createProduct };
