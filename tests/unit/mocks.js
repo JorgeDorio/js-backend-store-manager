@@ -1,3 +1,21 @@
+const insertReturn = [
+  {
+    fieldCount: 0,
+    affectedRows: 1,
+    insertId: 14,
+    info: '',
+    serverStatus: 2,
+    warningStatus: 0
+  },
+  undefined
+]
+
+const returnNewProduct = [[{
+  "id": 16,
+  "name": "Batmovel"
+}]]
+
+
 const allProducts = [
   {
     "id": 1,
@@ -22,8 +40,15 @@ const messageProductNotFound = {
   "message": "Product not found"
 }
 
+const newProduct = {
+  name: "Cinto do Batman"
+}
+
 module.exports = {
   allProducts,
   productId2,
-  messageProductNotFound
+  messageProductNotFound,
+  newProduct,
+  insertReturn,
+  returnNewProduct
 }
