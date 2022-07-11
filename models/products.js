@@ -19,8 +19,8 @@ const getLastProduct = async () => {
 };
 
 const createProduct = async (name) => {
-  insertProduct(name);
-  return getLastProduct();
+  await insertProduct(name);
+  return await getLastProduct();
 };
 
 module.exports = { listProducts, createProduct, insertProduct, getLastProduct };
