@@ -20,7 +20,19 @@ const getLastProduct = async () => {
 
 const createProduct = async (name) => {
   await insertProduct(name);
-  return await getLastProduct();
+  const lastProduct = await getLastProduct();
+  return lastProduct;
 };
 
-module.exports = { listProducts, createProduct, insertProduct, getLastProduct };
+const getProductById = async (ids) => {
+  let query;
+  let products = [];
+  for (const id of ids) {
+    [[query]] = await connection.query('SELECT id FROM StoreManager.products WHERE id = ?', [id]);
+    products.push(query);
+  }
+  products = products.filter((product) => product === undefined);
+  return products.length;
+};
+
+module.exports = { listProducts, getProductById, createProduct, insertProduct, getLastProduct };
