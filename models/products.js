@@ -7,7 +7,10 @@ const listProducts = async () => {
 };
 
 const insertProduct = async (name) => {
-  const [response] = await connection.execute('INSERT INTO StoreManager.products (name) VALUES (?)', [name]);
+  const [response] = await connection.execute(
+    'INSERT INTO StoreManager.products (name) VALUES (?)',
+    [name],
+);
   return response.affectedRows;
 };
 
