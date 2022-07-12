@@ -7,8 +7,8 @@ const listProducts = async () => {
 };
 
 const insertProduct = async (name) => {
-  const [query] = await connection.execute('INSERT INTO products (name) VALUES (?)', [name]);
-  return query.affectedRows;
+  const [response] = await connection.execute('INSERT INTO products (name) VALUES (?)', [name]);
+  return response.affectedRows;
 };
 
 const getLastProduct = async () => {
@@ -25,14 +25,14 @@ const createProduct = async (name) => {
 };
 
 const getProductById = async (ids) => {
-  let query;
-  let products = [];
-  for (const id of ids) {
-    [[query]] = await connection.query('SELECT id FROM StoreManager.products WHERE id = ?', [id]);
-    products.push(query);
-  }
-  products = products.filter((product) => product === undefined);
-  return products.length;
+  const querys = ids.map((id) => connection.query(
+    'SELECT id FROM StoreManager.products WHERE id = ?',
+    [id],
+));
+  const resolvingPromises = await Promise.all(querys);
+  const destructuring = resolvingPromises.map((query) => query[0]);
+  const getUnvalids = destructuring.filter((product) => product.length === 0);
+  return getUnvalids.length;
 };
 
 module.exports = { listProducts, getProductById, createProduct, insertProduct, getLastProduct };
