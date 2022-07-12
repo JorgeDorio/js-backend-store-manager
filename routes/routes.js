@@ -17,4 +17,4 @@ router.post('/products', verifyName, createProduct);
 // Routes about sales
 router.post('/sales', verifySaleId, verifySaleQuantity, verifyIfProductExists, registrySales);
 
-module.exports = { router };
+module.exports = router;

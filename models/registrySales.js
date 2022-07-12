@@ -4,11 +4,11 @@ const registrySale = async (saleDate, data) => {
   const [[{ id }]] = await connection.query(
     'SELECT id FROM StoreManager.sales ORDER BY id DESC LIMIT 1',
   );
-  await connection.query('INSERT INTO sales (date) VALUES (?)', [saleDate]);
+  await connection.query('INSERT INTO StoreManager.sales (date) VALUES (?)', [saleDate]);
 
   data.forEach(async (product) => {
     await connection.query(
-      'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
+      'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
       [id, product.productId, product.quantity],
     );
   });
@@ -21,19 +21,5 @@ const getLastSale = async (size) => {
   );
   return response;
 };
-
-// {
-//   "id": 3,
-//   "itemsSold": [
-//     {
-//       "productId": 1,
-//       "quantity":1
-//     },
-//     {
-//       "productId": 2,
-//       "quantity":5
-//     }
-//   ]
-// }
 
 module.exports = { registrySale, getLastSale };
