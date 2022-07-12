@@ -1,4 +1,4 @@
-const { CREATED } = require('../HTTP_STATUS')
+const { CREATED } = require('../HTTP_STATUS');
 const services = require('../services/sales');
 
 const registrySales = async (req, res) => {
