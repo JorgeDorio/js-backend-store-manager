@@ -1,6 +1,8 @@
 const express = require('express');
 const { verifyName, verifyProductId } = require('../middlewares/productsValidations');
-const { getProductById, getAllProducts, createProduct } = require('../controllers/products');
+const { getProductById,
+  getAllProducts, createProduct,
+  updateProduct } = require('../controllers/products');
 const { registrySales, getAllSales, getSaleById } = require('../controllers/registrySales');
 const { verifySaleId,
   verifySaleQuantity,
@@ -12,6 +14,7 @@ const router = express.Router();
 
 // Routes about products
 router.get('/products/:id', verifyProductId, getProductById);
+router.put('/products/:id', verifyProductId, verifyName, updateProduct);
 router.get('/products', getAllProducts);
 router.post('/products', verifyName, createProduct);
 

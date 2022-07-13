@@ -10,7 +10,7 @@ const insertProduct = async (name) => {
   const [response] = await connection.execute(
     'INSERT INTO StoreManager.products (name) VALUES (?)',
     [name],
-);
+  );
   return response.affectedRows;
 };
 
@@ -19,6 +19,15 @@ const getLastProduct = async () => {
     'SELECT * FROM StoreManager.products ORDER BY id DESC limit 1',
   );
   return response;
+};
+
+const updateProduct = async (name, id) => {
+  await connection.execute('UPDATE StoreManager.products SET name = ? WHERE id = ?', [name, id]);
+  const [affected] = await connection.query(
+    'SELECT * FROM StoreManager.products WHERE id = ?',
+    [id],
+);
+  return affected;
 };
 
 const createProduct = async (name) => {
@@ -38,4 +47,11 @@ const getProductById = async (ids) => {
   return getUnvalids.length;
 };
 
-module.exports = { listProducts, getProductById, createProduct, insertProduct, getLastProduct };
+module.exports = {
+  listProducts,
+  updateProduct,
+getProductById,
+  createProduct,
+insertProduct,
+getLastProduct,
+};

@@ -16,4 +16,9 @@ const createProduct = async (data) => {
   return response;
 };
 
-module.exports = { listProducts, createProduct };
+const updateProduct = async (name, id) => {
+  const response = await model.updateProduct(name, id);
+  return response;
+};
+
+module.exports = { listProducts, createProduct, updateProduct };
