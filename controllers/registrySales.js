@@ -1,4 +1,4 @@
-const { CREATED } = require('../HTTP_STATUS');
+const { CREATED, OK } = require('../HTTP_STATUS');
 const services = require('../services/sales');
 
 const registrySales = async (req, res) => {
@@ -7,4 +7,15 @@ const registrySales = async (req, res) => {
   res.status(CREATED).json(response);
 };
 
-module.exports = { registrySales };
+const getAllSales = async (_req, res) => {
+  const data = await services.listSales();
+  return res.status(OK).json(data);
+};
+
+const getSaleById = async (req, res) => {
+  const { id } = req.params;
+  const data = await services.listSales(id);
+  return res.status(OK).json(data);
+};
+
+module.exports = { registrySales, getAllSales, getSaleById };

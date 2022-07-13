@@ -13,4 +13,17 @@ const registrySales = async (data) => {
   };
 };
 
-module.exports = { registrySales };
+const listSales = async (id) => {
+  let data = await model.listSales();
+
+  if (id !== undefined) {
+    data = data.filter((product) => Number(product.saleId) === Number(id));
+    data = data.map((sale) => ({
+      date: sale.date, productId: sale.productId, quantity: sale.quantity,
+    }));
+  }
+
+  return data;
+};
+
+module.exports = { registrySales, listSales };

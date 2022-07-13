@@ -1,7 +1,7 @@
 const services = require('../services/products');
 const { NOT_FOUND, BAD_REQUEST, UNPROCESSABLE_ENTITY } = require('../HTTP_STATUS');
 
-const verifyId = async (req, res, next) => {
+const verifyProductId = async (req, res, next) => {
   const { id } = req.params;
   const data = await services.listProducts();
   [req.data] = data.filter((product) => Number(product.id) === Number(id));
@@ -21,4 +21,4 @@ const verifyName = async (req, res, next) => {
   next();
 };
 
-module.exports = { verifyId, verifyName };
+module.exports = { verifyProductId, verifyName };

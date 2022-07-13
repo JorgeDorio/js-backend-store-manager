@@ -22,4 +22,13 @@ const getLastSale = async (size) => {
   return response;
 };
 
-module.exports = { registrySale, getLastSale };
+const listSales = async () => {
+  const query = `SELECT sale_id AS saleId, date, product_id AS productId, quantity  
+    FROM StoreManager.sales_products 
+    INNER JOIN StoreManager.sales
+    ON sales_products.sale_id=sales.id`;
+  const [data] = await connection.query(query);
+  return data;
+};
+
+module.exports = { registrySale, getLastSale, listSales };
